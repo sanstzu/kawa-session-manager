@@ -2,7 +2,7 @@ use std::sync::Arc;
 
 use axum::BoxError;
 use redis::{aio::Connection, AsyncCommands, Client};
-use tokio::{stream, sync::Mutex};
+use tokio::sync::Mutex;
 
 use crate::models::StreamSession;
 
@@ -11,11 +11,6 @@ static STREAM_PATH_HASH: &'static str = "stream:stream_paths";
 
 pub struct StreamSessionRepository {
     connection: Arc<Mutex<Connection>>,
-}
-
-enum Error {
-    StreamKeyNotFound,
-    StreamKeyAlreadyExists,
 }
 
 impl StreamSessionRepository {

@@ -49,7 +49,7 @@ async fn main() -> Result<(), BoxError> {
         .with_state(state.clone());
 
     let http_addr = "0.0.0.0:8888";
-    let grpc_addr = "0.0.0.0:50052";
+    let grpc_addr = "0.0.0.0:50051";
 
     let http_listener = TcpListener::bind(http_addr).await?;
 

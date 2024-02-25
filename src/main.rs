@@ -53,8 +53,12 @@ async fn main() -> Result<(), BoxError> {
 
     let http_listener = TcpListener::bind(http_addr).await?;
 
-    axum::serve(http_listener, router).await.unwrap();
-    info!("Listening HTTP requests on: {}", http_addr);
+    tokio::spawn(async move {
+        info!("Listening HTTP requests on: {}", http_addr);
+        axum::serve(http_listener, router).await.unwrap();
+    });
+
+    info!("Listening gRPC requests on: {}", grpc_addr);
 
     Server::builder()
         .add_service(service::session_manager_server::SessionManagerServer::new(
@@ -64,8 +68,6 @@ async fn main() -> Result<(), BoxError> {
         ))
         .serve(grpc_addr.to_socket_addrs().unwrap().next().unwrap())
         .await?;
-
-    info!("Listening gRPC requests on: {}", grpc_addr);
 
     Ok(())
 }

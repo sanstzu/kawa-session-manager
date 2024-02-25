@@ -1,0 +1,22 @@
+[package]
+name = "kawa-session-manager"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+axum = "0.7.4"
+dotenv = "0.15.0"
+env_logger = "0.11.2"
+hmac = "0.12.1"
+log = "0.4.20"
+prost = "0.12.3"
+redis = { version = "0.24.0", features = ["aio", "tokio-comp"] }
+serde = { version = "1.0.196", features = ["derive"] }
+tokio = { version = "1.36.0", features = ["rt-multi-thread", "macros"] }
+tonic = "0.10.2"
+uuid = { version = "1.7.0", features = ["v4"] }
+
+[build-dependencies]
+tonic-build = "0.10.2"

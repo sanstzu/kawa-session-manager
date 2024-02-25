@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package session_manager;
+
+service SessionManager {
+    rpc GetSession(GetSessionRequest) returns (GetSessionResponse) {}
+}
+
+message GetSessionRequest {
+    string stream_key = 1;
+}
+
+message GetSessionResponse {
+    GetSessionEnums status = 1;
+    string stream_path = 2;
+}
+
+enum GetSessionEnums {
+    SESSION_GET_FOUND = 0;
+    SESSION_GET_NOT_FOUND = 1;
+    SESSION_GET_ERROR = 15;
+}
